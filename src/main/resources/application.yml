@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: rag-vector
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/rag_db}
+    username: ${SPRING_DATASOURCE_USERNAME:rag_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:rag_password}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:schema.sql
+
+server:
+  port: 8080
+
+llm:
+  api-key: ${OPENAI_API_KEY:}
+  model: gpt-4
+  embedding-model: text-embedding-3-small
+
+rag:
+  chunk-size: 1000
+  chunk-overlap: 200
+  top-k: 5
